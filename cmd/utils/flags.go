@@ -155,6 +155,11 @@ var (
 		Usage:    "Holesky network: pre-configured proof-of-stake test network",
 		Category: flags.EthCategory,
 	}
+	AuroriaFlag = &cli.BoolFlag{
+		Name:     "auroria",
+		Usage:    "Auroria network: pre-configured proof-of-stake test network",
+		Category: flags.EthCategory,
+	}
 	// Dev mode
 	DeveloperFlag = &cli.BoolFlag{
 		Name:     "dev",
@@ -916,6 +921,7 @@ var (
 		GoerliFlag,
 		SepoliaFlag,
 		HoleskyFlag,
+		AuroriaFlag,
 	}
 	// NetworkFlags is the flag group of all built-in supported networks.
 	NetworkFlags = append([]cli.Flag{MainnetFlag}, TestnetFlags...)
@@ -1003,6 +1009,8 @@ func setBootstrapNodes(ctx *cli.Context, cfg *p2p.Config) {
 		switch {
 		case ctx.Bool(HoleskyFlag.Name):
 			urls = params.HoleskyBootnodes
+		case ctx.Bool(AuroriaFlag.Name):
+			urls = params.AuroriaBootnodes
 		case ctx.Bool(SepoliaFlag.Name):
 			urls = params.SepoliaBootnodes
 		case ctx.Bool(GoerliFlag.Name):
