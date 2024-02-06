@@ -416,6 +416,8 @@ func (g *Genesis) configOrDefault(ghash common.Hash) *params.ChainConfig {
 		return params.SepoliaChainConfig
 	case ghash == params.GoerliGenesisHash:
 		return params.GoerliChainConfig
+	case ghash == params.AuroriaGenesisHash:
+		return params.AuroriaChainConfig
 	default:
 		return params.AllEthashProtocolChanges
 	}
@@ -576,6 +578,21 @@ func DefaultHoleskyGenesisBlock() *Genesis {
 		Difficulty: big.NewInt(0x01),
 		Timestamp:  1695902100,
 		Alloc:      decodePrealloc(holeskyAllocData),
+	}
+}
+
+func DefaultAuroriaGenesisBlock() *Genesis {
+	return &Genesis{
+		Config:     params.AuroriaChainConfig,
+		Nonce:      0x0,
+		GasLimit:   0x1c9c380,
+		Difficulty: big.NewInt(0x1),
+		Timestamp:  0x65c14d89,
+		ExtraData:  hexutil.MustDecode("0x0000000000000000000000000000000000000000000000000000000000000000"),
+		Mixhash:    common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000"),
+		ParentHash: common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000"),
+		Coinbase:   common.HexToAddress("0x0000000000000000000000000000000000000000"),
+		Alloc:      decodePrealloc(auroriaAllocData),
 	}
 }
 

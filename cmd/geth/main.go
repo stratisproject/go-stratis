@@ -286,6 +286,9 @@ func prepare(ctx *cli.Context) {
 	case ctx.IsSet(utils.HoleskyFlag.Name):
 		log.Info("Starting Geth on Holesky testnet...")
 
+	case ctx.IsSet(utils.AuroriaFlag.Name):
+		log.Info("Starting Geth on Auroria testnet...")
+
 	case ctx.IsSet(utils.DeveloperFlag.Name):
 		log.Info("Starting Geth in ephemeral dev mode...")
 		log.Warn(`You are running Geth in --dev mode. Please note the following:
