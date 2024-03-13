@@ -277,15 +277,6 @@ func main() {
 func prepare(ctx *cli.Context) {
 	// If we're running a known preset, log it for convenience.
 	switch {
-	case ctx.IsSet(utils.GoerliFlag.Name):
-		log.Info("Starting Geth on Görli testnet...")
-
-	case ctx.IsSet(utils.SepoliaFlag.Name):
-		log.Info("Starting Geth on Sepolia testnet...")
-
-	case ctx.IsSet(utils.HoleskyFlag.Name):
-		log.Info("Starting Geth on Holesky testnet...")
-
 	case ctx.IsSet(utils.AuroriaFlag.Name):
 		log.Info("Starting Geth on Auroria testnet...")
 
@@ -308,14 +299,12 @@ func prepare(ctx *cli.Context) {
 `)
 
 	case !ctx.IsSet(utils.NetworkIdFlag.Name):
-		log.Info("Starting Geth on Ethereum mainnet...")
+		log.Info("Starting Geth on Stratis mainnet...")
 	}
 	// If we're a full node on mainnet without --cache specified, bump default cache allowance
 	if !ctx.IsSet(utils.CacheFlag.Name) && !ctx.IsSet(utils.NetworkIdFlag.Name) {
 		// Make sure we're not on any supported preconfigured testnet either
-		if !ctx.IsSet(utils.HoleskyFlag.Name) &&
-			!ctx.IsSet(utils.SepoliaFlag.Name) &&
-			!ctx.IsSet(utils.GoerliFlag.Name) &&
+		if !ctx.IsSet(utils.AuroriaFlag.Name) &&
 			!ctx.IsSet(utils.DeveloperFlag.Name) {
 			// Nope, we're really on mainnet. Bump that cache up!
 			log.Info("Bumping default cache on mainnet", "provided", ctx.Int(utils.CacheFlag.Name), "updated", 4096)

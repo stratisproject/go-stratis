@@ -20,7 +20,16 @@ import "github.com/ethereum/go-ethereum/common"
 
 // MainnetBootnodes are the enode URLs of the P2P bootstrap nodes running on
 // the main Ethereum network.
-var MainnetBootnodes = []string{}
+var MainnetBootnodes = []string{
+	"enode://a484ac1e9ba411d3f2ed94c730342b199a20ae61148cd5272f0d192d716f2345829f7b5fe37c2c5fe10b353749e4bf80df576caea2efe5696110516943efdecc@157.90.164.232:30303",
+	"enode://917a1b527b8fc1f7858471e0ab6292ca0169f35735de54a4717192176b326bffecf9444e7c7f47e4c1f2f6597ff71a4c7d36208406b2af1cac46430046891ab2@138.201.116.212:30303",
+	"enode://dbc78d4dc93b5f907195fbfd9217a1cd6ab0f3ad12cf349bc134624cc70e8c78121586de0809ec5478c4c204fab508f6954221bbfdccb7d230f7635e503c49c0@37.27.28.0:30303",
+	"enode://8db54b7ec2d5df88acf0217039594d8e6e2f68668521ebe2485af4fd3f37df99e0836d789ae0969e9d7e601fbe4ae5ed83fda41f1f2e032625f73690bd75bf94@31.220.102.203:30303",
+	"enode://99120219b0c5cc34caa0e65b359e29ce0f6d3b7e2bc8f94bf59d892e6934a02bddec6f45e43f428fe92585b6573f2f3c1747d9021663300208a69c7b986e4fc4@94.72.121.31:30303",
+	"enode://2e7bce2e75a6bd8258568a8a0768de8bd6a78ee31eac966a90b0959173704c509577b0224feb24fa02704b3b65527b3f34aad772c58c06b71f0d580bec3e4c58@109.123.234.55:30303",
+	"enode://9424eab9c95b3584117e22902dabd880c2a2fbfee773404d0f9cfb5d87ffeafa67f3b368f43eba3fac306ab9299068227480ed50a144392ff335bbedb20536ff@84.247.158.2:30303",
+	"enode://a997259bbb6076de2e967f90a9056b56f8d9e37911c502f366fbf14f62226570b106d36f9415f872e3037f95c1e6f051ca9dd3ed3b8b2c44fdda3547a3f03dac@46.250.243.161:30303",
+}
 
 // AuroriaBootnodes are the enode URLs of the P2P bootstrap nodes running on the
 // Auroria test network.
@@ -31,45 +40,9 @@ var AuroriaBootnodes = []string{
 	"enode://dc9e5e5cf936a7b5bccb86b894e35141bbff9bee84840ad65baae6f51bf1a01122b5602772154ae3dc57fb51dadbf3a146705d44e7991bf84f078f4701e43cb0@138.197.124.43:30303",
 }
 
-// HoleskyBootnodes are the enode URLs of the P2P bootstrap nodes running on the
-// Holesky test network.
-var HoleskyBootnodes = []string{
-	// EF DevOps
-	"enode://ac906289e4b7f12df423d654c5a962b6ebe5b3a74cc9e06292a85221f9a64a6f1cfdd6b714ed6dacef51578f92b34c60ee91e9ede9c7f8fadc4d347326d95e2b@146.190.13.128:30303",
-	"enode://a3435a0155a3e837c02f5e7f5662a2f1fbc25b48e4dc232016e1c51b544cb5b4510ef633ea3278c0e970fa8ad8141e2d4d0f9f95456c537ff05fdf9b31c15072@178.128.136.233:30303",
-}
-
-// SepoliaBootnodes are the enode URLs of the P2P bootstrap nodes running on the
-// Sepolia test network.
-var SepoliaBootnodes = []string{
-	// EF DevOps
-	"enode://4e5e92199ee224a01932a377160aa432f31d0b351f84ab413a8e0a42f4f36476f8fb1cbe914af0d9aef0d51665c214cf653c651c4bbd9d5550a934f241f1682b@138.197.51.181:30303", // sepolia-bootnode-1-nyc3
-	"enode://143e11fb766781d22d92a2e33f8f104cddae4411a122295ed1fdb6638de96a6ce65f5b7c964ba3763bba27961738fef7d3ecc739268f3e5e771fb4c87b6234ba@146.190.1.103:30303",  // sepolia-bootnode-1-sfo3
-	"enode://8b61dc2d06c3f96fddcbebb0efb29d60d3598650275dc469c22229d3e5620369b0d3dedafd929835fe7f489618f19f456fe7c0df572bf2d914a9f4e006f783a9@170.64.250.88:30303",  // sepolia-bootnode-1-syd1
-	"enode://10d62eff032205fcef19497f35ca8477bea0eadfff6d769a147e895d8b2b8f8ae6341630c645c30f5df6e67547c03494ced3d9c5764e8622a26587b083b028e8@139.59.49.206:30303",  // sepolia-bootnode-1-blr1
-	"enode://9e9492e2e8836114cc75f5b929784f4f46c324ad01daf87d956f98b3b6c5fcba95524d6e5cf9861dc96a2c8a171ea7105bb554a197455058de185fa870970c7c@138.68.123.152:30303", // sepolia-bootnode-1-ams3
-}
-
-// GoerliBootnodes are the enode URLs of the P2P bootstrap nodes running on the
-// Görli test network.
-var GoerliBootnodes = []string{
-	// Upstream bootnodes
-	"enode://011f758e6552d105183b1761c5e2dea0111bc20fd5f6422bc7f91e0fabbec9a6595caf6239b37feb773dddd3f87240d99d859431891e4a642cf2a0a9e6cbb98a@51.141.78.53:30303",
-	"enode://176b9417f511d05b6b2cf3e34b756cf0a7096b3094572a8f6ef4cdcb9d1f9d00683bf0f83347eebdf3b81c3521c2332086d9592802230bf528eaf606a1d9677b@13.93.54.137:30303",
-	"enode://46add44b9f13965f7b9875ac6b85f016f341012d84f975377573800a863526f4da19ae2c620ec73d11591fa9510e992ecc03ad0751f53cc02f7c7ed6d55c7291@94.237.54.114:30313",
-	"enode://b5948a2d3e9d486c4d75bf32713221c2bd6cf86463302339299bd227dc2e276cd5a1c7ca4f43a0e9122fe9af884efed563bd2a1fd28661f3b5f5ad7bf1de5949@18.218.250.66:30303",
-
-	// Ethereum Foundation bootnode
-	"enode://a61215641fb8714a373c80edbfa0ea8878243193f57c96eeb44d0bc019ef295abd4e044fd619bfc4c59731a73fb79afe84e9ab6da0c743ceb479cbb6d263fa91@3.11.147.67:30303",
-
-	// Goerli Initiative bootnodes
-	"enode://d4f764a48ec2a8ecf883735776fdefe0a3949eb0ca476bd7bc8d0954a9defe8fea15ae5da7d40b5d2d59ce9524a99daedadf6da6283fca492cc80b53689fb3b3@46.4.99.122:32109",
-	"enode://d2b720352e8216c9efc470091aa91ddafc53e222b32780f505c817ceef69e01d5b0b0797b69db254c586f493872352f5a022b4d8479a00fc92ec55f9ad46a27e@88.99.70.182:30303",
-}
-
 var V5Bootnodes = []string{}
 
-const dnsPrefix = "enrtree://AKA3AM6LPBYEUDMVNU3BSVQJ5AD45Y7YPOHJLEF6W26QOE4VTUDPE@"
+// const dnsPrefix = "enrtree://AKA3AM6LPBYEUDMVNU3BSVQJ5AD45Y7YPOHJLEF6W26QOE4VTUDPE@"
 
 // KnownDNSNetwork returns the address of a public DNS-based node list for the given
 // genesis hash and protocol. See https://github.com/ethereum/discv4-dns-lists for more
@@ -80,12 +53,8 @@ func KnownDNSNetwork(genesis common.Hash, protocol string) string {
 	// switch genesis {
 	// case MainnetGenesisHash:
 	// 	net = "mainnet"
-	// case GoerliGenesisHash:
-	// 	net = "goerli"
-	// case SepoliaGenesisHash:
-	// 	net = "sepolia"
-	// case HoleskyGenesisHash:
-	// 	net = "holesky"
+	// case AuroriaGenesisHash:
+	// 	net = "auroria"
 	// default:
 	// 	return ""
 	// }
