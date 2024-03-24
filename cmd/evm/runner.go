@@ -38,8 +38,8 @@ import (
 	"github.com/ethereum/go-ethereum/eth/tracers/logger"
 	"github.com/ethereum/go-ethereum/internal/flags"
 	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/trie"
-	"github.com/ethereum/go-ethereum/trie/triedb/hashdb"
+	"github.com/ethereum/go-ethereum/triedb"
+	"github.com/ethereum/go-ethereum/triedb/hashdb"
 	"github.com/urfave/cli/v2"
 )
 
@@ -144,11 +144,11 @@ func runCmd(ctx *cli.Context) error {
 			initialGas = genesisConfig.GasLimit
 		}
 	} else {
-		genesisConfig.Config = params.AllEthashProtocolChanges
+		genesisConfig.Config = params.AllDevChainProtocolChanges
 	}
 
 	db := rawdb.NewMemoryDatabase()
-	triedb := trie.NewDatabase(db, &trie.Config{
+	triedb := triedb.NewDatabase(db, &triedb.Config{
 		Preimages: preimages,
 		HashDB:    hashdb.Defaults,
 	})
