@@ -203,12 +203,8 @@ func getGenesisState(db ethdb.Database, blockhash common.Hash) (alloc types.Gene
 	switch blockhash {
 	case params.MainnetGenesisHash:
 		genesis = DefaultGenesisBlock()
-	case params.GoerliGenesisHash:
-		genesis = DefaultGoerliGenesisBlock()
-	case params.SepoliaGenesisHash:
-		genesis = DefaultSepoliaGenesisBlock()
-	case params.HoleskyGenesisHash:
-		genesis = DefaultHoleskyGenesisBlock()
+	case params.AuroriaGenesisHash:
+		genesis = DefaultAuroriaGenesisBlock()
 	}
 	if genesis != nil {
 		return genesis.Alloc, nil
