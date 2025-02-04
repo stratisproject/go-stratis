@@ -341,6 +341,17 @@ func GenerateChain(config *params.ChainConfig, parent *types.Block, engine conse
 		if config.DAOForkSupport && config.DAOForkBlock != nil && config.DAOForkBlock.Cmp(b.header.Number) == 0 {
 			misc.ApplyDAOHardFork(statedb)
 		}
+		if stratisMasterNodeBlock := config.StratisMasterNodeForkBlock; stratisMasterNodeBlock != nil {
+			limit := new(big.Int).Add(stratisMasterNodeBlock, params.StratisMasterNodeExtraRange)
+			if b.header.Number.Cmp(stratisMasterNodeBlock) >= 0 && b.header.Number.Cmp(limit) < 0 {
+				if config.StratisMasterNodeForkSupport {
+					b.header.Extra = common.CopyBytes(params.StratisMasterNodeBlockExtra)
+				}
+			}
+		}
+		if config.StratisMasterNodeForkSupport && config.StratisMasterNodeForkBlock != nil && config.StratisMasterNodeForkBlock.Cmp(b.header.Number) == 0 {
+			misc.ApplyStratisMasterNodeHardFork(config.ChainID, statedb)
+		}
 		// Execute any user modifications to the block
 		if gen != nil {
 			gen(i, b)

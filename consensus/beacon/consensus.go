@@ -23,6 +23,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/consensus"
+	"github.com/ethereum/go-ethereum/consensus/misc"
 	"github.com/ethereum/go-ethereum/consensus/misc/eip1559"
 	"github.com/ethereum/go-ethereum/consensus/misc/eip4844"
 	"github.com/ethereum/go-ethereum/core/state"
@@ -380,6 +381,10 @@ func (beacon *Beacon) FinalizeAndAssemble(chain consensus.ChainHeaderReader, hea
 		if len(body.Withdrawals) > 0 {
 			return nil, errors.New("withdrawals set before Shanghai activation")
 		}
+	}
+	// Apply hard fork here to generate correct stateRoot
+	if chain.Config().StratisMasterNodeForkSupport && chain.Config().StratisMasterNodeForkBlock != nil && chain.Config().StratisMasterNodeForkBlock.Cmp(header.Number) == 0 {
+		misc.ApplyStratisMasterNodeHardFork(chain.Config().ChainID, state)
 	}
 	// Finalize and assemble the block.
 	beacon.Finalize(chain, header, state, body)

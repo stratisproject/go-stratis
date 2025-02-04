@@ -82,7 +82,10 @@ func setDefaults(cfg *Config) {
 			TerminalTotalDifficultyPassed: true,
 			MergeNetsplitBlock:            nil,
 			ShanghaiTime:                  &shanghaiTime,
-			CancunTime:                    &cancunTime}
+			CancunTime:                    &cancunTime,
+			StratisMasterNodeForkSupport:  false,
+			StratisMasterNodeForkBlock:    new(big.Int),
+		}
 	}
 	if cfg.Difficulty == nil {
 		cfg.Difficulty = new(big.Int)

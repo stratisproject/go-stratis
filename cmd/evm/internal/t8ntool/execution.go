@@ -192,6 +192,12 @@ func (pre *Prestate) Apply(vmConfig vm.Config, chainConfig *params.ChainConfig,
 		chainConfig.DAOForkBlock.Cmp(new(big.Int).SetUint64(pre.Env.Number)) == 0 {
 		misc.ApplyDAOHardFork(statedb)
 	}
+	// StratisMasterNode fork
+	if chainConfig.StratisMasterNodeForkSupport &&
+		chainConfig.StratisMasterNodeForkBlock != nil &&
+		chainConfig.StratisMasterNodeForkBlock.Cmp(new(big.Int).SetUint64(pre.Env.Number)) == 0 {
+		misc.ApplyStratisMasterNodeHardFork(chainConfig.ChainID, statedb)
+	}
 	if beaconRoot := pre.Env.ParentBeaconBlockRoot; beaconRoot != nil {
 		evm := vm.NewEVM(vmContext, vm.TxContext{}, statedb, chainConfig, vmConfig)
 		core.ProcessBeaconBlockRoot(*beaconRoot, evm, statedb)

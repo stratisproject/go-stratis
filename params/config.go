@@ -104,6 +104,8 @@ var (
 		CancunTime:                    nil,
 		PragueTime:                    nil,
 		VerkleTime:                    nil,
+		StratisMasterNodeForkSupport:  false,
+		StratisMasterNodeForkBlock:    nil,
 		TerminalTotalDifficulty:       nil,
 		TerminalTotalDifficultyPassed: true,
 		Ethash:                        new(EthashConfig),
@@ -155,6 +157,8 @@ var (
 		CancunTime:                    nil,
 		PragueTime:                    nil,
 		VerkleTime:                    nil,
+		StratisMasterNodeForkSupport:  false,
+		StratisMasterNodeForkBlock:    nil,
 		TerminalTotalDifficulty:       nil,
 		TerminalTotalDifficultyPassed: false,
 		Ethash:                        nil,
@@ -185,6 +189,8 @@ var (
 		CancunTime:                    nil,
 		PragueTime:                    nil,
 		VerkleTime:                    nil,
+		StratisMasterNodeForkSupport:  false,
+		StratisMasterNodeForkBlock:    nil,
 		TerminalTotalDifficulty:       nil,
 		TerminalTotalDifficultyPassed: false,
 		Ethash:                        new(EthashConfig),
@@ -215,6 +221,8 @@ var (
 		CancunTime:                    newUint64(0),
 		PragueTime:                    nil,
 		VerkleTime:                    nil,
+		StratisMasterNodeForkSupport:  false,
+		StratisMasterNodeForkBlock:    nil,
 		TerminalTotalDifficulty:       big.NewInt(0),
 		TerminalTotalDifficultyPassed: true,
 		Ethash:                        new(EthashConfig),
@@ -247,6 +255,8 @@ var (
 		VerkleTime:                    nil,
 		TerminalTotalDifficulty:       nil,
 		TerminalTotalDifficultyPassed: false,
+		StratisMasterNodeForkSupport:  false,
+		StratisMasterNodeForkBlock:    nil,
 		Ethash:                        new(EthashConfig),
 		Clique:                        nil,
 	}
@@ -305,6 +315,9 @@ type ChainConfig struct {
 	//
 	// TODO(karalabe): Drop this field eventually (always assuming PoS mode)
 	TerminalTotalDifficultyPassed bool `json:"terminalTotalDifficultyPassed,omitempty"`
+
+	StratisMasterNodeForkBlock   *big.Int `json:"stratisMasterNodeForkBlock,omitempty"`
+	StratisMasterNodeForkSupport bool     `json:"stratisMasterNodeForkSupport,omitempty"`
 
 	// Various consensus engines
 	Ethash *EthashConfig `json:"ethash,omitempty"`
@@ -430,6 +443,11 @@ func (c *ChainConfig) IsHomestead(num *big.Int) bool {
 // IsDAOFork returns whether num is either equal to the DAO fork block or greater.
 func (c *ChainConfig) IsDAOFork(num *big.Int) bool {
 	return isBlockForked(c.DAOForkBlock, num)
+}
+
+// IsStratisMasterNodeFork returns whether num is either equal to the StratisMasterNode fork block or greater.
+func (c *ChainConfig) IsStratisMasterNodeFork(num *big.Int) bool {
+	return isBlockForked(c.StratisMasterNodeForkBlock, num)
 }
 
 // IsEIP150 returns whether num is either equal to the EIP150 fork block or greater.
@@ -629,6 +647,9 @@ func (c *ChainConfig) checkCompatible(newcfg *ChainConfig, headNumber *big.Int, 
 	}
 	if c.IsDAOFork(headNumber) && c.DAOForkSupport != newcfg.DAOForkSupport {
 		return newBlockCompatError("DAO fork support flag", c.DAOForkBlock, newcfg.DAOForkBlock)
+	}
+	if c.IsStratisMasterNodeFork(headNumber) && c.StratisMasterNodeForkSupport != newcfg.StratisMasterNodeForkSupport {
+		return newBlockCompatError("StratisMasterNode fork support flag", c.StratisMasterNodeForkBlock, newcfg.StratisMasterNodeForkBlock)
 	}
 	if isForkBlockIncompatible(c.EIP150Block, newcfg.EIP150Block, headNumber) {
 		return newBlockCompatError("EIP150 fork block", c.EIP150Block, newcfg.EIP150Block)
