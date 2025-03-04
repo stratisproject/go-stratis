@@ -537,7 +537,7 @@ func DefaultAuroriaGenesisBlock() *Genesis {
 		Nonce:      0x0,
 		GasLimit:   0x1c9c380,
 		Difficulty: big.NewInt(0x1),
-		Timestamp:  0x65cb6c6a,
+		Timestamp:  0x67c70bef,
 		ExtraData:  hexutil.MustDecode("0x0000000000000000000000000000000000000000000000000000000000000000"),
 		Mixhash:    common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000"),
 		ParentHash: common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000"),
