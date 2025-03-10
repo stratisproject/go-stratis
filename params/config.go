@@ -27,7 +27,7 @@ import (
 // Genesis hashes to enforce below configs on.
 var (
 	MainnetGenesisHash = common.HexToHash("0x5e0a9a5ccf609f52455c4786161fc64a4764b4aeaf1c6489775a0f13b9da0834")
-	AuroriaGenesisHash = common.HexToHash("0x82b71b4bd8a829f0dc3dc526cbdf43505b755af3b30a0fd9aa8deb07b327c48d")
+	AuroriaGenesisHash = common.HexToHash("0x441d6fb23613618b372041ca3daff31103a57389be6c831e8699d9019d3b5c78")
 )
 
 func newUint64(val uint64) *uint64 { return &val }
@@ -77,8 +77,8 @@ var (
 		ArrowGlacierBlock:             big.NewInt(0),
 		TerminalTotalDifficulty:       big.NewInt(0),
 		TerminalTotalDifficultyPassed: true,
-		ShanghaiTime:                  newUint64(1707830378),
-		CancunTime:                    newUint64(1707830378),
+		ShanghaiTime:                  newUint64(1741097967),
+		CancunTime:                    newUint64(1741097967),
 	}
 	// AllEthashProtocolChanges contains every protocol change (EIPs) introduced
 	// and accepted by the Ethereum core developers into the Ethash consensus.
