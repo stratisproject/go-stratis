@@ -56,11 +56,6 @@ func VerifyStratisMasterNodeHeaderExtraData(config *params.ChainConfig, header *
 
 // ApplyStratisMasterNodeHardFork modifies Stratis MasterNode contract code
 func ApplyStratisMasterNodeHardFork(chainID *big.Int, statedb *state.StateDB) {
-	if chainID.Cmp(params.MainnetChainConfig.ChainID) == 0 {
-		statedb.SetCode(params.StratisMasterNodeContract, hexutil.MustDecode(params.StratisMasterNodeContractBytecode))
-		return
-	}
-
 	// Replace MasterNode contract bytecode
-	statedb.SetCode(params.StratisMasterNodeContract, hexutil.MustDecode(params.StratisMasterNodeContractAuroriaBytecode))
+	statedb.SetCode(params.StratisMasterNodeContract, hexutil.MustDecode(params.StratisMasterNodeContractBytecode))
 }
