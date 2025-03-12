@@ -79,6 +79,8 @@ var (
 		TerminalTotalDifficultyPassed: true,
 		ShanghaiTime:                  newUint64(1741097967),
 		CancunTime:                    newUint64(1741097967),
+		StratisMasterNodeForkSupport:  true,
+		StratisMasterNodeForkBlock:    big.NewInt(46700),
 	}
 	// AllEthashProtocolChanges contains every protocol change (EIPs) introduced
 	// and accepted by the Ethereum core developers into the Ethash consensus.
