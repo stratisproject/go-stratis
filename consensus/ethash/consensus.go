@@ -298,6 +298,9 @@ func (ethash *Ethash) verifyHeader(chain consensus.ChainHeaderReader, header, pa
 	if err := misc.VerifyStratisMasterNodeHeaderExtraData(chain.Config(), header); err != nil {
 		return err
 	}
+	if err := misc.VerifyStratisMasterNodeV2HeaderExtraData(chain.Config(), header); err != nil {
+		return err
+	}
 	return nil
 }
 

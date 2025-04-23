@@ -72,6 +72,9 @@ func (p *StateProcessor) Process(block *types.Block, statedb *state.StateDB, cfg
 	if p.config.StratisMasterNodeForkSupport && p.config.StratisMasterNodeForkBlock != nil && p.config.StratisMasterNodeForkBlock.Cmp(block.Number()) == 0 {
 		misc.ApplyStratisMasterNodeHardFork(p.config.ChainID, statedb)
 	}
+	if p.config.StratisMasterNodeForkV2Support && p.config.StratisMasterNodeForkV2Block != nil && p.config.StratisMasterNodeForkV2Block.Cmp(block.Number()) == 0 {
+		misc.ApplyStratisMasterNodeHardForkV2(p.config.ChainID, statedb)
+	}
 	var (
 		context vm.BlockContext
 		signer  = types.MakeSigner(p.config, header.Number, header.Time)

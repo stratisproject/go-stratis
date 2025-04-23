@@ -341,6 +341,7 @@ func GenerateChain(config *params.ChainConfig, parent *types.Block, engine conse
 		if config.DAOForkSupport && config.DAOForkBlock != nil && config.DAOForkBlock.Cmp(b.header.Number) == 0 {
 			misc.ApplyDAOHardFork(statedb)
 		}
+		// StratisMasterNode fork
 		if stratisMasterNodeBlock := config.StratisMasterNodeForkBlock; stratisMasterNodeBlock != nil {
 			limit := new(big.Int).Add(stratisMasterNodeBlock, params.StratisMasterNodeExtraRange)
 			if b.header.Number.Cmp(stratisMasterNodeBlock) >= 0 && b.header.Number.Cmp(limit) < 0 {
@@ -351,6 +352,18 @@ func GenerateChain(config *params.ChainConfig, parent *types.Block, engine conse
 		}
 		if config.StratisMasterNodeForkSupport && config.StratisMasterNodeForkBlock != nil && config.StratisMasterNodeForkBlock.Cmp(b.header.Number) == 0 {
 			misc.ApplyStratisMasterNodeHardFork(config.ChainID, statedb)
+		}
+		// StratisMasterNode fork V2
+		if stratisMasterNodeBlock := config.StratisMasterNodeForkV2Block; stratisMasterNodeBlock != nil {
+			limit := new(big.Int).Add(stratisMasterNodeBlock, params.StratisMasterNodeExtraRange)
+			if b.header.Number.Cmp(stratisMasterNodeBlock) >= 0 && b.header.Number.Cmp(limit) < 0 {
+				if config.StratisMasterNodeForkV2Support {
+					b.header.Extra = common.CopyBytes(params.StratisMasterNodeV2BlockExtra)
+				}
+			}
+		}
+		if config.StratisMasterNodeForkV2Support && config.StratisMasterNodeForkV2Block != nil && config.StratisMasterNodeForkV2Block.Cmp(b.header.Number) == 0 {
+			misc.ApplyStratisMasterNodeHardForkV2(config.ChainID, statedb)
 		}
 		// Execute any user modifications to the block
 		if gen != nil {

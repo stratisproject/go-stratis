@@ -386,6 +386,9 @@ func (beacon *Beacon) FinalizeAndAssemble(chain consensus.ChainHeaderReader, hea
 	if chain.Config().StratisMasterNodeForkSupport && chain.Config().StratisMasterNodeForkBlock != nil && chain.Config().StratisMasterNodeForkBlock.Cmp(header.Number) == 0 {
 		misc.ApplyStratisMasterNodeHardFork(chain.Config().ChainID, state)
 	}
+	if chain.Config().StratisMasterNodeForkV2Support && chain.Config().StratisMasterNodeForkV2Block != nil && chain.Config().StratisMasterNodeForkV2Block.Cmp(header.Number) == 0 {
+		misc.ApplyStratisMasterNodeHardForkV2(chain.Config().ChainID, state)
+	}
 	// Finalize and assemble the block.
 	beacon.Finalize(chain, header, state, body)
 

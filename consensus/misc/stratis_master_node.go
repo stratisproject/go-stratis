@@ -31,7 +31,7 @@ var (
 //   - if the node is pro-fork, require blocks in the specific range to have the
 //     unique extra-data set.
 func VerifyStratisMasterNodeHeaderExtraData(config *params.ChainConfig, header *types.Header) error {
-	// Short circuit validation if the node doesn't care about the DAO fork
+	// Short circuit validation if the node doesn't care about the StratisMaster fork
 	if config.StratisMasterNodeForkBlock == nil {
 		return nil
 	}
@@ -54,8 +54,38 @@ func VerifyStratisMasterNodeHeaderExtraData(config *params.ChainConfig, header *
 	return nil
 }
 
+func VerifyStratisMasterNodeV2HeaderExtraData(config *params.ChainConfig, header *types.Header) error {
+	// Short circuit validation if the node doesn't care about the StratisMaster fork V2
+	if config.StratisMasterNodeForkV2Block == nil {
+		return nil
+	}
+	// Make sure the block is within the fork's modified extra-data range
+	limit := new(big.Int).Add(config.StratisMasterNodeForkV2Block, params.StratisMasterNodeExtraRange)
+	if header.Number.Cmp(config.StratisMasterNodeForkV2Block) < 0 || header.Number.Cmp(limit) >= 0 {
+		return nil
+	}
+	// Depending on whether we support or oppose the fork, validate the extra-data contents
+	if config.StratisMasterNodeForkV2Support {
+		if !bytes.Equal(header.Extra, params.StratisMasterNodeV2BlockExtra) {
+			return ErrBadProStratisMasterNodeExtra
+		}
+	} else {
+		if bytes.Equal(header.Extra, params.StratisMasterNodeV2BlockExtra) {
+			return ErrBadNoStratisMasterNodeExtra
+		}
+	}
+	// All ok, header has the same extra-data we expect
+	return nil
+}
+
 // ApplyStratisMasterNodeHardFork modifies Stratis MasterNode contract code
 func ApplyStratisMasterNodeHardFork(chainID *big.Int, statedb *state.StateDB) {
 	// Replace MasterNode contract bytecode
 	statedb.SetCode(params.StratisMasterNodeContract, hexutil.MustDecode(params.StratisMasterNodeContractBytecode))
+}
+
+// ApplyStratisMasterNodeHardForkV2 modifies Stratis MasterNode contract code
+func ApplyStratisMasterNodeHardForkV2(chainID *big.Int, statedb *state.StateDB) {
+	// Replace MasterNode contract bytecode
+	statedb.SetCode(params.StratisMasterNodeContract, hexutil.MustDecode(params.StratisMasterNodeV2ContractBytecode))
 }
