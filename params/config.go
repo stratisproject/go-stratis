@@ -63,7 +63,7 @@ var (
 		StratisMasterNodeForkV2Support: false,
 		StratisMasterNodeForkV2Block:   nil,
 		PragueTime:                     nil,
-		DepositContractAddress:         common.HexToAddress("0x0000000000000000000000000000000000001002"),
+		DepositContractAddress:         common.HexToAddress("0x0000000000000000000000000000000000001001"),
 		Ethash:                         new(EthashConfig),
 		BlobScheduleConfig: &BlobScheduleConfig{
 			Cancun: DefaultCancunBlobConfig,
@@ -95,7 +95,7 @@ var (
 		StratisMasterNodeForkV2Support: true,
 		StratisMasterNodeForkV2Block:   big.NewInt(245700),
 		PragueTime:                     nil,
-		DepositContractAddress:         common.HexToAddress("0x0000000000000000000000000000000000001002"),
+		DepositContractAddress:         common.HexToAddress("0x0000000000000000000000000000000000001001"),
 		Ethash:                         new(EthashConfig),
 		BlobScheduleConfig: &BlobScheduleConfig{
 			Cancun: DefaultCancunBlobConfig,
